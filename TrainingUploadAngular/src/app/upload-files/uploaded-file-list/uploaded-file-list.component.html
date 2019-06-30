@@ -1,0 +1,14 @@
+<h3 class="header-label">UPLOADED FILES</h3>
+<div class="table-container-two">
+    <table class="table table-hover">
+        <tbody>
+            <tr *ngFor="let f of service.filesUploaded">
+                <td style="width: 95%">{{f.Name}}</td>
+                <td style="width: 5%">
+                    <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(f.Id)"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

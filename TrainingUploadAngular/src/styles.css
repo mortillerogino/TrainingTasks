@@ -1,0 +1,54 @@
+.row-first {
+    height: 350px;
+    overflow: hidden;
+    
+}
+
+.table-container-one {
+    height: 250px;
+    overflow: auto;
+    
+}
+
+.table-container-two {
+    height: 350px;
+    overflow: auto;
+    
+}
+
+.main-container {
+    height: 100%;
+    
+}
+
+.drag-box {
+    height: 300px;
+    border-style: dashed;
+    border-color: black;
+
+}
+
+.drag-input {
+    height: 100%;
+    opacity: 0;
+}
+
+.drag-label {
+    opacity: 0;
+}
+
+.upload-pic {
+    position: absolute;
+    left: 42%;
+    top: 33%;
+}
+
+.header-label {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+
+
+
+

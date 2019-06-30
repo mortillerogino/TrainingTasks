@@ -1,0 +1,9 @@
+<form method="post" enctype="multipart/form-data" >
+  <h3 class="header-label">DRAG FILES BELOW OR CLICK TO CHOOSE</h3>
+    <div class="custom-file drag-box">
+      <input class="custom-file-input drag-input" type="file" name="file" id="file"  (change)="onNewFile($event)" multiple/>
+      <label class="custom-file-label drag-label" for="customFile">Drag File here or Choose file through Browse</label>
+    </div>
+    <i class="fas fa-cloud-upload-alt fa-9x upload-pic text-danger"></i>
+</form>
+

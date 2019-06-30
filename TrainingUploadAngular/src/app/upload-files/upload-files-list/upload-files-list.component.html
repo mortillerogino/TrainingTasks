@@ -1,0 +1,11 @@
+<h3 class="header-label">FILES IN PROGRESS</h3> 
+<div class="table-container-two">
+    <table class="table table-hover">
+        <tbody>
+            <tr *ngFor="let f of service.filesUploading">
+                <td style="width: 50%">{{f.Name}}</td>
+                <td style="width: 50%"><p><ngb-progressbar [showValue]="true" type="danger" [value]="f.Progress" height="30px"></ngb-progressbar></p></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

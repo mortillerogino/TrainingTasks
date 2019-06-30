@@ -1,0 +1,20 @@
+● src
++---● app
+|   +--● upload-files
+|   |  |--upload-files.component.ts|.html|.css
+|   |  +--● upload-file-drag
+|   |  |  |--upload-file-drag.component.ts|.html
+|   |  |
+|   |  +--● upload-file-list
+|   |  |  |--upload-file-list.component.ts|.html
+|   |  |
+       +--● uploaded-file-list
+|   |  |  |--uploaded-file-list.component.ts|.html
+|   |  |
+|   |  +--● shared
+|   |     |--upload-file.service.ts
+|   |     |--upload-file.model.ts  
+|   |
+|   |--app.module.ts
+|
+|--index.html (cdn path for bootstrap & fa icons)
