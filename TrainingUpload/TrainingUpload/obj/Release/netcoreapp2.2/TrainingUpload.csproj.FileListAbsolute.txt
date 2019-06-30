@@ -1,0 +1,14 @@
+C:\Work\TrainingUpload\TrainingUpload\bin\Release\netcoreapp2.2\TrainingUpload.deps.json
+C:\Work\TrainingUpload\TrainingUpload\bin\Release\netcoreapp2.2\TrainingUpload.runtimeconfig.json
+C:\Work\TrainingUpload\TrainingUpload\bin\Release\netcoreapp2.2\TrainingUpload.runtimeconfig.dev.json
+C:\Work\TrainingUpload\TrainingUpload\bin\Release\netcoreapp2.2\TrainingUpload.dll
+C:\Work\TrainingUpload\TrainingUpload\bin\Release\netcoreapp2.2\TrainingUpload.pdb
+C:\Work\TrainingUpload\TrainingUpload\obj\Release\netcoreapp2.2\TrainingUpload.csprojAssemblyReference.cache
+C:\Work\TrainingUpload\TrainingUpload\obj\Release\netcoreapp2.2\TrainingUpload.csproj.CoreCompileInputs.cache
+C:\Work\TrainingUpload\TrainingUpload\obj\Release\netcoreapp2.2\TrainingUpload.RazorAssemblyInfo.cache
+C:\Work\TrainingUpload\TrainingUpload\obj\Release\netcoreapp2.2\TrainingUpload.RazorAssemblyInfo.cs
+C:\Work\TrainingUpload\TrainingUpload\obj\Release\netcoreapp2.2\TrainingUpload.AssemblyInfoInputs.cache
+C:\Work\TrainingUpload\TrainingUpload\obj\Release\netcoreapp2.2\TrainingUpload.AssemblyInfo.cs
+C:\Work\TrainingUpload\TrainingUpload\obj\Release\netcoreapp2.2\TrainingUpload.RazorTargetAssemblyInfo.cache
+C:\Work\TrainingUpload\TrainingUpload\obj\Release\netcoreapp2.2\TrainingUpload.dll
+C:\Work\TrainingUpload\TrainingUpload\obj\Release\netcoreapp2.2\TrainingUpload.pdb
