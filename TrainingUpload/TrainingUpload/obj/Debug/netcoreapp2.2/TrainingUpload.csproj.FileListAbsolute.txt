@@ -12,3 +12,17 @@ C:\Work\TrainingUpload\TrainingUpload\obj\Debug\netcoreapp2.2\TrainingUpload.Raz
 C:\Work\TrainingUpload\TrainingUpload\bin\Debug\netcoreapp2.2\TrainingUpload.pdb
 C:\Work\TrainingUpload\TrainingUpload\obj\Debug\netcoreapp2.2\TrainingUpload.dll
 C:\Work\TrainingUpload\TrainingUpload\obj\Debug\netcoreapp2.2\TrainingUpload.pdb
+C:\Work\TrainingTasks\TrainingUpload\TrainingUpload\bin\Debug\netcoreapp2.2\TrainingUpload.deps.json
+C:\Work\TrainingTasks\TrainingUpload\TrainingUpload\bin\Debug\netcoreapp2.2\TrainingUpload.runtimeconfig.json
+C:\Work\TrainingTasks\TrainingUpload\TrainingUpload\bin\Debug\netcoreapp2.2\TrainingUpload.runtimeconfig.dev.json
+C:\Work\TrainingTasks\TrainingUpload\TrainingUpload\bin\Debug\netcoreapp2.2\TrainingUpload.dll
+C:\Work\TrainingTasks\TrainingUpload\TrainingUpload\bin\Debug\netcoreapp2.2\TrainingUpload.pdb
+C:\Work\TrainingTasks\TrainingUpload\TrainingUpload\obj\Debug\netcoreapp2.2\TrainingUpload.csprojAssemblyReference.cache
+C:\Work\TrainingTasks\TrainingUpload\TrainingUpload\obj\Debug\netcoreapp2.2\TrainingUpload.csproj.CoreCompileInputs.cache
+C:\Work\TrainingTasks\TrainingUpload\TrainingUpload\obj\Debug\netcoreapp2.2\TrainingUpload.RazorAssemblyInfo.cache
+C:\Work\TrainingTasks\TrainingUpload\TrainingUpload\obj\Debug\netcoreapp2.2\TrainingUpload.RazorAssemblyInfo.cs
+C:\Work\TrainingTasks\TrainingUpload\TrainingUpload\obj\Debug\netcoreapp2.2\TrainingUpload.AssemblyInfoInputs.cache
+C:\Work\TrainingTasks\TrainingUpload\TrainingUpload\obj\Debug\netcoreapp2.2\TrainingUpload.AssemblyInfo.cs
+C:\Work\TrainingTasks\TrainingUpload\TrainingUpload\obj\Debug\netcoreapp2.2\TrainingUpload.RazorTargetAssemblyInfo.cache
+C:\Work\TrainingTasks\TrainingUpload\TrainingUpload\obj\Debug\netcoreapp2.2\TrainingUpload.dll
+C:\Work\TrainingTasks\TrainingUpload\TrainingUpload\obj\Debug\netcoreapp2.2\TrainingUpload.pdb

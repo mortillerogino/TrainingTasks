@@ -12940,11 +12940,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Work\\TrainingUpload\\TrainingUpload\\TrainingUpload.csproj",
+      "projectUniqueName": "C:\\Work\\TrainingTasks\\TrainingUpload\\TrainingUpload\\TrainingUpload.csproj",
       "projectName": "TrainingUpload",
-      "projectPath": "C:\\Work\\TrainingUpload\\TrainingUpload\\TrainingUpload.csproj",
+      "projectPath": "C:\\Work\\TrainingTasks\\TrainingUpload\\TrainingUpload\\TrainingUpload.csproj",
       "packagesPath": "C:\\Users\\ginom\\.nuget\\packages\\",
-      "outputPath": "C:\\Work\\TrainingUpload\\TrainingUpload\\obj\\",
+      "outputPath": "C:\\Work\\TrainingTasks\\TrainingUpload\\TrainingUpload\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",

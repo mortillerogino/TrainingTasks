@@ -25,7 +25,7 @@ namespace TrainingUpload.Controllers
 
         // GET: api/UploadFile
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UploadedFileDetails>>> GetPaymentDetails()
+        public async Task<ActionResult<IEnumerable<UploadedFileDetails>>> GetFileDetails()
         {
             return await _context.UploadedFileDetailsList.ToListAsync();
         }
@@ -42,10 +42,12 @@ namespace TrainingUpload.Controllers
 
                 var file = Request.Form.Files[0];
                 string fileName = "";
+                string path = "UploadedFiles";
+                Directory.CreateDirectory(path);
                 if (file.Length > 0)
                 {
                     fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    string fullPath = Path.Combine("UploadedFiles", fileName);
+                    string fullPath = Path.Combine(path, fileName);
                     details = new UploadedFileDetails
                     {
                         Name = fileName,
@@ -73,16 +75,29 @@ namespace TrainingUpload.Controllers
         [HttpDelete("{id}")]
          public async Task<IActionResult> DeleteFile(int id)
         {
-            var file = await _context.UploadedFileDetailsList.FindAsync(id);
-            if (file == null)
+            try
             {
-                return NotFound();
+                var file = await _context.UploadedFileDetailsList.FindAsync(id);
+                if (file == null)
+                {
+                    return NotFound();
+                }
+
+                if (System.IO.File.Exists(file.Path))
+                {
+                    System.IO.File.Delete(file.Path);
+                }
+
+                _context.UploadedFileDetailsList.Remove(file);
+                await _context.SaveChangesAsync();
+
+                return Ok();
             }
-
-            _context.UploadedFileDetailsList.Remove(file);
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message); ;
+            }
+            
         }
     }
 }
