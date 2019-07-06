@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadFileService } from 'src/app/shared/upload-file.service';
+import { ToastrService } from 'ngx-toastr';
+import { UploadFile } from 'src/app/shared/upload-file.model';
 
 @Component({
   selector: 'app-uploaded-file-list',
@@ -8,7 +10,8 @@ import { UploadFileService } from 'src/app/shared/upload-file.service';
 })
 export class UploadedFileListComponent implements OnInit {
 
-  constructor(private service: UploadFileService) { }
+  constructor(private service: UploadFileService,
+    private toastr:ToastrService) { }
 
   ngOnInit() {
     this.service.refreshList();
@@ -18,8 +21,9 @@ export class UploadedFileListComponent implements OnInit {
     if (confirm("Are you sure you want to delete this file?")) {
       this.service.deleteFile(id)
       .subscribe(res => {
-        console.log(res);
-        this.service.refreshList()
+        this.service.refreshList();
+        var data = res as UploadFile;
+        this.toastr.info('Successfully deleted file ' + data.Name, 'File Drag Uploader');
       });
     }
     

@@ -7,6 +7,7 @@ Requirements to run:
 - .Net Core 2.2
 - Angular
 - Visual Studio
+- Sql Server
 
 
 Steps to run:

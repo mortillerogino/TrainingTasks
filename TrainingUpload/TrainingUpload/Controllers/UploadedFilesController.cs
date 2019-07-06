@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TrainingUpload.Models;
+using TrainingUpload.Persistence;
 
 namespace TrainingUpload.Controllers
 {
@@ -16,18 +17,19 @@ namespace TrainingUpload.Controllers
     [ApiController]
     public class UploadedFilesController : ControllerBase
     {
-        private readonly UploadedFileContext _context;
+        private UnitOfWork unitOfWork;
 
         public UploadedFilesController(UploadedFileContext context)
         {
-            this._context = context;
+            unitOfWork = new UnitOfWork(context);
         }
 
-        // GET: api/UploadFile
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UploadedFileDetails>>> GetFileDetails()
+        public ActionResult<IEnumerable<UploadedFileDetails>> GetFileDetails()
         {
-            return await _context.UploadedFileDetailsList.ToListAsync();
+            var files = unitOfWork.UploadedFiles.GetAll();
+
+            return Ok(files);
         }
 
 
@@ -37,33 +39,13 @@ namespace TrainingUpload.Controllers
             try
             {
                 await Task.Delay(1000);
-
-                UploadedFileDetails details = null;
-
                 var file = Request.Form.Files[0];
-                string fileName = "";
-                string path = "UploadedFiles";
-                Directory.CreateDirectory(path);
-                if (file.Length > 0)
-                {
-                    fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    string fullPath = Path.Combine(path, fileName);
-                    details = new UploadedFileDetails
-                    {
-                        Name = fileName,
-                        Path = fullPath
-                    };
 
-                    _context.UploadedFileDetailsList.Add(details);
-                    await _context.SaveChangesAsync();
+                var uploadedDetails = unitOfWork.UploadedFiles.SaveFile(file);
+                unitOfWork.UploadedFiles.Add(uploadedDetails);
+                await unitOfWork.CompleteAsync();
 
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
-                }
-
-                return Ok(details);
+                return Ok(uploadedDetails);
             }
             catch (System.Exception ex)
             {
@@ -71,13 +53,13 @@ namespace TrainingUpload.Controllers
             }
         }
 
-        // DELETE: api/PaymentDetail/5
         [HttpDelete("{id}")]
          public async Task<IActionResult> DeleteFile(int id)
         {
             try
             {
-                var file = await _context.UploadedFileDetailsList.FindAsync(id);
+                var file = unitOfWork.UploadedFiles.SingleOrDefault(a => a.Id == id);
+
                 if (file == null)
                 {
                     return NotFound();
@@ -88,10 +70,10 @@ namespace TrainingUpload.Controllers
                     System.IO.File.Delete(file.Path);
                 }
 
-                _context.UploadedFileDetailsList.Remove(file);
-                await _context.SaveChangesAsync();
+                unitOfWork.UploadedFiles.Remove(file);
+                await unitOfWork.CompleteAsync();
 
-                return Ok();
+                return Ok(file);
             }
             catch (Exception ex)
             {
