@@ -32,7 +32,7 @@ export class UploadFileService {
           if(uploadFile.Progress == 100)
           {
             await new Promise( resolve => setTimeout(resolve, 1000) );
-            this.deleteMsg(uploadFile);
+            this.deleteMsgFromUploadingList(uploadFile);
           }
             
         }
@@ -57,7 +57,7 @@ export class UploadFileService {
     .then(res => this.filesUploaded = res as UploadFile[])
   }
 
-  deleteMsg(uploadedFile: UploadFile) {
+  deleteMsgFromUploadingList(uploadedFile: UploadFile) {
     const index: number = this.filesUploading.indexOf(uploadedFile);
     if (index !== -1) {
       this.filesUploading.splice(index, 1);
@@ -65,7 +65,6 @@ export class UploadFileService {
   }
 
   deleteFile(id) {
-    console.log(id)
     
     return this.http.delete(this.rootURL + '/UploadedFiles/' + id)
 
@@ -74,6 +73,16 @@ export class UploadFileService {
   checkIfDuplicate(file)
   {
       var retVal = false;
+      for(var i = 0; i < this.filesUploading.length; i++)
+      {
+        if ((this.filesUploading[i] as UploadFile).Name == file.name)
+        {
+          retVal = true;
+          break;
+        }
+      }
+
+
       for(var i = 0; i < this.filesUploaded.length; i++)
       {
         if ((this.filesUploaded[i] as UploadFile).Name == file.name)

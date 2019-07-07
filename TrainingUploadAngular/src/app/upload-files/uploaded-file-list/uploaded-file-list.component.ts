@@ -23,6 +23,12 @@ export class UploadedFileListComponent implements OnInit {
       .subscribe(res => {
         this.service.refreshList();
         var data = res as UploadFile;
+        
+        console.log(data);
+        var index = this.service.filesUploaded.indexOf(data)
+        this.service.filesUploaded.splice(index, 1);
+
+
         this.toastr.info('Successfully deleted file ' + data.Name, 'File Drag Uploader');
       });
     }

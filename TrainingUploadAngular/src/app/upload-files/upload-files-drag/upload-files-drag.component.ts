@@ -23,6 +23,11 @@ export class UploadFilesDragComponent implements OnInit {
 
   onNewFile($event)
   {
+    if ($event.target.value === "")
+    {
+       return;
+    }
+
     for (let file of $event.target.files)
     {
       var dataToUpload = new UploadFile();
@@ -39,6 +44,7 @@ export class UploadFilesDragComponent implements OnInit {
       }
 
       var duplicateName = this.service.checkIfDuplicate(file);
+      console.log("duplicate is " + duplicateName);
 
       if (duplicateName)
       {
@@ -48,19 +54,10 @@ export class UploadFilesDragComponent implements OnInit {
       {
         this.service.uploadFile(dataToUpload);
       }
-      
-
-      
+     
     }
-
-      
-
-
-
-
-
-
-
+    
+    $event.target.value = "";
     
   }
 
