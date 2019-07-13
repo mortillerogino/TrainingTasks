@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TrainingUpload.Models;
 using TrainingUpload.Persistence;
+using TrainingUpload.Utilities;
 
 namespace TrainingUpload.Controllers
 {
@@ -41,7 +42,7 @@ namespace TrainingUpload.Controllers
                 await Task.Delay(1000);
                 var file = Request.Form.Files[0];
 
-                var uploadedDetails = unitOfWork.UploadedFiles.SaveFile(file);
+                var uploadedDetails = FileHandler.SaveFile(file);
                 unitOfWork.UploadedFiles.Add(uploadedDetails);
                 await unitOfWork.CompleteAsync();
 

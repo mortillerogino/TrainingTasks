@@ -41,8 +41,6 @@ namespace TrainingUpload
             services.AddDbContext<UploadedFileContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
-            //services.AddCors();
-
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(

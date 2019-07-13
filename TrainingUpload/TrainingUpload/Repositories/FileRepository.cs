@@ -17,33 +17,7 @@ namespace TrainingUpload.Repositories
         {
         }
 
-        public UploadedFileDetails SaveFile(IFormFile file)
-        {
-            if (file.Length < 1)
-            {
-                return null;
-            }
-
-            string fileName = "";
-            string path = "UploadedFiles";
-            Directory.CreateDirectory(path);
-
-            fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            string fullPath = Path.Combine(path, fileName);
-
-            using (var stream = new FileStream(fullPath, FileMode.Create))
-            {
-                file.CopyTo(stream);
-            }
-
-            UploadedFileDetails details = new UploadedFileDetails
-            {
-                Name = fileName,
-                Path = fullPath
-            };
-
-            return details;
-        }
+        
 
         public UploadedFileContext UploadedFileContext
         {

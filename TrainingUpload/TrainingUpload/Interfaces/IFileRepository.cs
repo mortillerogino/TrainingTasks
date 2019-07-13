@@ -9,6 +9,6 @@ namespace TrainingUpload.Interfaces
 {
     public interface IFileRepository : IRepository<UploadedFileDetails>
     {
-        UploadedFileDetails SaveFile(IFormFile file);
+
     }
 }
