@@ -1,33 +1,42 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TrainingUpload.Implementations;
 using TrainingUpload.Interfaces;
 using TrainingUpload.Models;
-using TrainingUpload.Repositories;
 
 namespace TrainingUpload.Persistence
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly UploadedFileContext _context;
+        private UploadedFileContext context;
+        private IRepository<UploadedFileDetails> fileRepository;
+
+        public IRepository<UploadedFileDetails> FileRepository
+        {
+            get
+            {
+                return this.fileRepository ?? new Repository<UploadedFileDetails>(context);
+            }
+        }
+
 
         public UnitOfWork(UploadedFileContext context)
         {
-            _context = context;
-            UploadedFiles = new FileRepository(_context);
+            this.context = context;
         }
 
-        public IFileRepository UploadedFiles { get; } 
-
-        public async Task<int> CompleteAsync()
+        public void Commit()
         {
-            return await _context.SaveChangesAsync();
+            context.SaveChanges();
         }
 
         public void Dispose()
         {
-            _context.Dispose();
+            context.Dispose();
         }
+
     }
 }

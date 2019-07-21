@@ -5,36 +5,42 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TrainingUpload.Interfaces;
+using TrainingUpload.Models;
 
-namespace TrainingUpload.Repositories
+namespace TrainingUpload.Implementations
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly DbContext Context;
+        private readonly DbContext context;
+        private readonly DbSet<TEntity> dbSet;
 
         public Repository(DbContext context)
         {
-            Context = context;
+            this.context = context;
+            this.dbSet = context.Set<TEntity>();
         }
 
         public void Add(TEntity entity)
         {
-            Context.Set<TEntity>().Add(entity);
+            dbSet.Add(entity);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            return Context.Set<TEntity>().ToList();
+            return dbSet.ToList();
         }
 
         public void Remove(TEntity entity)
         {
-            Context.Set<TEntity>().Remove(entity);
+            TEntity existing = dbSet.SingleOrDefault(t => t == entity);
+
+            if (existing != null)
+                dbSet.Remove(existing);
         }
 
         public TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
-            return Context.Set<TEntity>().SingleOrDefault(predicate);
+            return dbSet.SingleOrDefault(predicate);
         }
     }
 }

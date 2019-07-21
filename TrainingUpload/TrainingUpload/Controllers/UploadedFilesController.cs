@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TrainingUpload.Interfaces;
 using TrainingUpload.Models;
 using TrainingUpload.Persistence;
 using TrainingUpload.Utilities;
@@ -18,17 +19,17 @@ namespace TrainingUpload.Controllers
     [ApiController]
     public class UploadedFilesController : ControllerBase
     {
-        private UnitOfWork unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
 
-        public UploadedFilesController(UploadedFileContext context)
+        public UploadedFilesController(IUnitOfWork unitOfWork)
         {
-            unitOfWork = new UnitOfWork(context);
+            this.unitOfWork = unitOfWork;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<UploadedFileDetails>> GetFileDetails()
         {
-            var files = unitOfWork.UploadedFiles.GetAll();
+            var files = unitOfWork.FileRepository.GetAll();
 
             return Ok(files);
         }
@@ -43,8 +44,9 @@ namespace TrainingUpload.Controllers
                 var file = Request.Form.Files[0];
 
                 var uploadedDetails = FileHandler.SaveFile(file);
-                unitOfWork.UploadedFiles.Add(uploadedDetails);
-                await unitOfWork.CompleteAsync();
+
+                unitOfWork.FileRepository.Add(uploadedDetails);
+                unitOfWork.Commit();
 
                 return Ok(uploadedDetails);
             }
@@ -55,11 +57,11 @@ namespace TrainingUpload.Controllers
         }
 
         [HttpDelete("{id}")]
-         public async Task<IActionResult> DeleteFile(int id)
+         public IActionResult DeleteFile(int id)
         {
             try
             {
-                var file = unitOfWork.UploadedFiles.SingleOrDefault(a => a.Id == id);
+                var file = unitOfWork.FileRepository.SingleOrDefault(a => a.Id == id);
 
                 if (file == null)
                 {
@@ -71,8 +73,8 @@ namespace TrainingUpload.Controllers
                     System.IO.File.Delete(file.Path);
                 }
 
-                unitOfWork.UploadedFiles.Remove(file);
-                await unitOfWork.CompleteAsync();
+                unitOfWork.FileRepository.Remove(file);
+                unitOfWork.Commit();
 
                 return Ok(file);
             }

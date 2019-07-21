@@ -11,7 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
+using TrainingUpload.Interfaces;
 using TrainingUpload.Models;
+using TrainingUpload.Persistence;
 
 namespace TrainingUpload
 {
@@ -27,6 +29,10 @@ namespace TrainingUpload
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<UploadedFileContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(options =>
@@ -38,19 +44,8 @@ namespace TrainingUpload
                     }
                 });
 
-            services.AddDbContext<UploadedFileContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+            
 
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.WithOrigins("http://www.contoso.com")
-                                            .AllowAnyHeader()
-                                            .AllowAnyMethod();
-                    });
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
